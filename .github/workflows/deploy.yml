@@ -1,0 +1,31 @@
+# .github/workflows/deploy.yml
+name: Simple CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Check files
+      run: |
+        echo "Checking if index.html exists..."
+        ls -la
+        if [ -f "index.html" ]; then
+          echo "✅ index.html found!"
+        else
+          echo "❌ index.html not found!"
+          exit 1
+        fi
+    
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./
