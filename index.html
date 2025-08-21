@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My CI/CD Project</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 50px 20px;
+        }
+        
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .feature-box {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .version {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.5);
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        
+        button {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        button:hover {
+            transform: scale(1.05);
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 CI/CD Demo Project</h1>
+        
+        <div class="feature-box">
+            <h2>Welcome to Automated Deployment!</h2>
+            <p>This website automatically deploys when you push code to GitHub.</p>
+            <button onclick="updateCounter()">Click Me!</button>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number" id="clicks">0</div>
+                <div>Total Clicks</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="visits">1</div>
+                <div>Page Visits</div>
+            </div>
+        </div>
+        
+        <div class="feature-box">
+            <h3>✅ CI/CD Features:</h3>
+            <p>• Automatic Testing<br>
+               • Automatic Deployment<br>
+               • Error Notifications<br>
+               • Version Control</p>
+        </div>
+    </div>
+    
+    <div class="version">Version 1.0</div>
+    
+    <script>
+        let clickCount = 0;
+        let visitCount = parseInt(localStorage.getItem('visits') || '0') + 1;
+        
+        document.getElementById('visits').textContent = visitCount;
+        localStorage.setItem('visits', visitCount.toString());
+        
+        function updateCounter() {
+            clickCount++;
+            document.getElementById('clicks').textContent = clickCount;
+            
+            // Add some animation
+            const button = event.target;
+            button.style.background = '#4ecdc4';
+            setTimeout(() => {
+                button.style.background = '#ff6b6b';
+            }, 200);
+        }
+        
+        // Simple test function
+        function runTests() {
+            console.log('Running tests...');
+            
+            // Test 1: Check if title exists
+            const title = document.querySelector('h1');
+            console.assert(title !== null, 'Title should exist');
+            
+            // Test 2: Check if button works
+            const button = document.querySelector('button');
+            console.assert(button !== null, 'Button should exist');
+            
+            console.log('All tests passed! ✅');
+        }
+        
+        // Run tests on page load
+        window.onload = runTests;
+    </script>
+</body>
+</html>
